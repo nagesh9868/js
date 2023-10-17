@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        color: red;
+        font-size: 1rem;
+        font-family: sans-serif;
+    }
+
+    .bgColor {
+        background-color: yellow;
+    }
+</style>
+<body>
+    <h1 id="async-head">Async execution in JS</h1>
+    <button id="stop">Stop the heading change</button><br><br>
+    <button id="stopint">Stop Interval</button>&nbsp;
+    <button id="startint">Start Interval</button>
+    <h1 id="heading">My Name is Nageshwar Sharma</h1>
+
+    <h1 id="selected"></h1>
+    <ul>
+        <li class="item">Car</li>
+        <li class="item">Chair</li>
+        <li class="item">Mobile</li>
+        <li class="item">Laptop</li>
+    </ul>
+
+    <!-- <h2>Star Pattern</h2> -->
+    <!-- <div id="star"></div> -->
+    <script>
+        // this is tamporal dead zone
+        // console.log(a)
+        // this is tamporal dead zone
+        // this is tamporal dead zone
+        // console.log(a)//error you are in temporal dead zone
+        // this is temporal dead zone
+        // let a = 10; //End of temporal dead zone
+
+        //closure again 
+        // let count = 10;
+        // function counter(){
+        //     console.log(count++);
+        // }
+        // counter()// 10
+        // counter()//20
+
+        // function counter(){
+        //     let count = 10;
+        //     console.log(count++);
+        // }
+        // counter()
+        // counter()//it will print 10
+
+        // function counter(){
+        //     let count = 0;
+        //     function calculate(){
+        //         console.log(count++)
+        //     }
+        //     return calculate()
+        // }
+        // counter()// 0
+        // counter()//0
+        // counter()//0
+
+
+        //closures 
+        // function counter(){
+        //     let count = 0;
+        //     function calculate(){
+        //         console.log(count++);
+        //     }
+        //     return calculate
+        // }
+        // let result = counter()
+        // result()// it prints the value of variable
+        // result()// it prints the vaule after the increament run
+        // result()// it prints the value of count after increament
+        //closures with IIFE
+        // let result = (function counter(){
+        //     let count = 0;
+        //     function calculate(){
+        //         console.log(count++);
+        //     }
+        //     return calculate
+        // })()
+        // result()
+        // result()
+
+        //iife 
+        // let greeting = (function(){
+        //     document.write('Hello Nagesh')
+        // })()
+
+        // greeting = 'something'
+        // console.log(greeting);
+
+        // let sum = 9
+        // (function(){
+        //     console.log(4+5);
+        // })
+        // sum()
+
+        let products = document.getElementsByClassName('item')
+
+        //object oriented pattern(encapsulation)
+        let cartCounter = (function () {
+            let count = 0;
+            // console.log(count)
+            return counter = {
+                increament: () => count++,
+                decreament: () => count--,
+                totalCount: () => count,
+            }
+        })()
+        // console.log(cartCounter.increament());//console log will also effect the count 
+        // console.log(cartCounter.increament());//console log will also effect the count 
+
+        document.getElementById('selected').innerHTML = cartCounter.totalCount()
+        function updateCart() {
+            document.getElementById('selected').innerHTML = cartCounter.totalCount()
+        }
+        for (let i = 0; i < products.length; i++) {
+            // console.log(i);
+            // console.log(products[i]);
+            products[i].addEventListener('click', function () {
+                // console.log(this.className);
+                // console.log(this.className.indexOf('bgColor')<0);
+                if (this.className.indexOf('bgColor') < 0) {
+                    // console.log('if COndition ');
+                    this.className += ' bgColor'
+                    cartCounter.increament()
+                    // console.log(cartCounter.increament());//console log will also effect the count 
+                    updateCart()
+                } else {
+                    // console.log('elese condition');
+                    this.className = this.className.replace('bgColor', '')
+                    cartCounter.decreament()
+                    // console.log(cartCounter.decreament());//console log will also effect the count 
+                    updateCart()
+                }
+            })
+        }
+
+        // console.log(products);
+        // let cartCounter = function (){
+        //     let count = 0;
+        //     return{
+        //         increament:()=>count+=1,
+        //         decreament:()=>count+=1
+        //     }
+        // }
+
+        // let cart = cartCounter();
+
+
+        // for(let i = 0; i<5; i++){
+        //     for(let j = 1; j<=5;j++){
+        //         document.write('*')
+        //         // document.getElementById('star') = "*"
+        //     }
+        //     document.write("<br/>")
+        //     // document.getElementById('star') = "<br/>"
+        // }
+        // for (i = 1; i <= 5; i++) {
+        //     console.log(i);
+        //     for (j = 0; j < i; j++) {
+        //         document.write('*')
+        //     }
+        //     document.write("<br/>")
+        // }
+
+        // var x = 100;//number
+        // x = "something";//string
+        // x=true; //boolean
+
+        // setTimeout(() => {   
+        //     console.log(c)
+        // }, 1000);
+        // let c = 10
+
+        // 'use strict'
+        // x = 'ram'
+        // function ram(){
+        //     var x = 'nagesh '
+        //     return x
+        // }
+
+
+        // document.write('variable ', x, console.log('2'))
+        // document.write(ram())
+
+        // function makeAdder(x) {
+        //     return function (y) {
+        //         return x + y;
+        //     };
+        // }
+
+        // const add5 = makeAdder(5);
+        // const add10 = makeAdder(10);
+
+        // console.log(add5(2)); // 7
+        // console.log(add10(2)); // 12
+
+        // let x = 10;
+        // function test(){
+        //     let x = 20
+        //     document.write(x);
+        // }
+        // test()
+        // document.write(x)
+
+        // let x = 10 // a is a in window object
+        // function test(){
+        //     document.write(x);
+        // }
+
+        // test()
+
+        // let counter = 0;
+        // function count(){
+        //     document.write(counter++, "<br>")
+        // }
+        // counter = 20 //accidental change of the global variable do not try to declare the variable in global scope
+        // count()
+        // count()
+        // count()
+        // count()
+        // count()
+
+        //concept of lexical scoping
+        // function count(){
+        //     let counter = 0;
+        //     function countChild(){ 
+        //         document.write(counter+=1, '<br>')
+        //     }
+        // }
+        // count() // 1
+        // count() //1
+        // count() //1 always print 1 as the varialble getting reset every time when the funciton is running.
+
+        //this is exactly a closure
+        // function counter(){
+        //     let count = 10;
+        //     function childCounter(){
+        //         document.write(count+=1, "<br>")
+        //     }
+        //     return childCounter
+        // }
+
+        // let finalCounter = counter()
+        // finalCounter()
+        // finalCounter()
+        // finalCounter()
+
+        //Normal closure
+        // function counter(){
+        //     let x = 10;
+        //     function counterChild(){
+        //         return x+=1
+        //     }
+
+        //     return counterChild
+        // }
+
+        // let finalCounter = counter()
+        // console.dir(finalCounter)
+
+        //iife(imediate invoke function expression) function 
+        // (function test(){
+        //     document.write("test","<br>");
+        // })()
+
+        // //closure with IIFE(immediate invoke function expression)
+        // const result  = (function counter(){
+        //     let a = 0;
+        //     function childCounter(){
+        //         return document.write(a+=1, '<br>')
+        //     };
+        //     return childCounter
+        // })()
+
+        // result()
+        // result()
+        // result()
+        // console.dir(result)
+
+
+        //IIFE with async await 
+        // let promise = () => {
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             return resolve(456)
+        //         }, 3000);
+        //     })
+        // }
+
+        // (async ()=>{
+        //     let a = await promise()
+        //     document.write(a, "<br>")
+        //     let b = await promise()
+        //     document.write(b, "<br>")
+        //     let c = await promise()
+        //     document.write(c, "<br>")
+        //     let d = await promise()
+        //     document.write(d, "<br>")
+        // })()
+
+        //requirement and differnce for IIFE
+        // let init = 10;
+        // (function () {
+        //     let init = 'I am IIFE'
+        //     console.log(init);
+        // }
+        // )()
+        // console.log(init);// it will not use the variable from the IIFE
+
+
+        //Module patten in javascript
+        // const UIcontroller = (function(){ 
+        //     let headingChanged = function(){
+        //         document.getElementById('heading').innerHTML = 'My Name is Ram Kalp Sharma'
+        //     }
+        //     // return headingChanged()
+        //     return {
+        //         callTextChange: ()=>{
+        //             headingChanged(),
+        //             console.log('heading changed');
+        //         }
+        //     }
+        // })()
+
+        // UIcontroller.callTextChange()
+
+
+        // simple closure in javascript
+        // const UIcontroller = function () {
+
+        //     let headingChanged = function () {
+        //         document.getElementById('heading').innerHTML = 'My Name is Ram Kalp Sharma'
+        //     }
+
+        //     return headingChanged()
+
+        //     return {
+        //         callTextChange: () => {
+        //             headingChanged(),
+        //                 console.log('heading changed');
+        //         }
+        //     }
+        // }
+
+        // UIcontroller()
+        // UIcontroller.callTextChange()
+
+        //module pattern in Java script
+        // let clarkKent = {
+        //     name: 'Clark Kent',
+        //     secretIdentity: 'superman',
+        //     introduce: function (){
+        //         document.write(`Hi My name is ${this.name}<br> `)
+        //     },
+        //     issueReport: function (){
+        //         document.write(`${this.secretIdentity} saves the day `)
+        //     }        
+        // }
+        // console.logclarkKent.name
+        // console.log(clarkKent.secretIdentity)
+        // clarkKent.introduce()
+        // clarkKent.issueReport()
+
+        // //reveal module pattern in Java script
+        // const clarkKent = (function () {
+        //     const name = "Clark Kent";
+        //     const secretIdentity = "Superman";
+        //     const introduce = function () {
+        //         // return document.write(`Hi, My name is ${this.name}<br>`)
+        //         return `Hi, My name is ${this.name}<br>`
+        //     };
+        //     const issueReport = function () {
+        //         // return document.write(`${this.secretIdentity} saves the day `)
+        //         return `${this.secretIdentity} saves the day`
+        //     };
+        //     return { introduce, issueReport, name}
+        // })()
+        // console.log(clarkKent.name)
+        // console.log(clarkKent.secretIdentity)
+        // document.write(clarkKent.introduce())
+        // document.write(clarkKent.issueReport())
+
+        // console.log(clarkKent.issueReport())
+
+        //singleton pattern.
+        // let singleton = (function(){
+        //     let instance = null;
+        //     function createInstance(){
+        //         return{
+        //             name: 'Rohit', age: 26 , score: Math.floor(Math.random()*100)
+        //         }     
+        //     }
+        //     return {
+        //         getInstance : function(){
+        //             if (!instance){
+        //                 instance = createInstance()
+        //             }
+        //             return instance
+        //         }
+        //     }
+        // })()
+        // const instance1 = singleton.getInstance() //this will create instence as it does not have the instence created
+        // const instance2 = singleton.getInstance()// this will use the same object as the above one is already created the instance 
+        // const instance3 = singleton.getInstance()//this will take the same object instead there are Math.random() function is used
+        // console.log(instance1, instance2, instance3);
+
+        //Observer Pattern
+        // class YoutubeChannel{
+        //     subscriptionArray = []
+
+        //     subscriber(subscriber){
+        //         this.subscriptionArray.push(subscriber)
+        //     }
+
+        //     unSubscriber(subscriber){
+        //         this.subscriptionArray = this.subscriptionArray.filter(
+        //             (sub)=> sub.id !== subscriber.id
+        //         )
+        //     }
+
+        //     publish(msg){
+        //         console.log(this.subscriptionArray)
+        //         for(let subscriber of this.subscriptionArray){
+        //             subscriber.notify(msg)
+        //         }
+        //     }
+        // }
+        // class Subscriber{
+        //     constructor(id,name){
+        //         this.id = id,
+        //         this.name = name
+        //     }
+
+        //     notify(msg){
+        //         console.log (`hey ${this.name}:${msg}`)
+        //     } 
+        // }
+        // const sub1 = new Subscriber(1, "Rohit")
+        // const sub2 = new Subscriber(2, "Mohit")
+        // const sub3 = new Subscriber(3, "Raam")
+        // const channel = new YoutubeChannel()
+        // channel.subscriber(sub1)
+        // channel.subscriber(sub2)
+        // channel.subscriber(sub3)
+        // channel.publish('please check the latest video')
+        // console.log("below are the unsubscriber");
+        // channel.unSubscriber(sub3)
+        // channel.publish('What are you feeling about my video')
+    </script>
+        <!-- <script src="./index.js"></script> -->
+        <!-- <script src="./inheritance.js"></script> -->
+        <!-- <script src="./letConstVar.js"></script> -->
+        <!-- <script src="./Classes&inheritance.js"></script> -->
+        <!-- <script src="./OOPS.js"></script> -->
+        <!-- <script src="./arrowFunctions.js"></script> -->
+        <!-- <script src="./callstack.js"></script> -->
+        <script src="./Async_await.js"></script>
+</body>
+</html>
