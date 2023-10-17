@@ -26,7 +26,7 @@
         }).then((item) => {
             console.log(item);
             document.getElementById('photo-site').innerHTML = item.map((item) =>
-                `<div class="photos" style="border: 3px solid blue;width:100%; display:inline-flex; border-radius: 1rem;margin:1rem;justify-content:center;padding:1rem">
+                `<div class="photos" style="border: 3px solid blue; display:inline-flex; border-radius: 1rem;margin:1rem;justify-content:center;padding:1rem">
                 <a style = "display:flex; flex-direction: column; align-items:center;">
                     <div class="thumbnail">
                         <img style="height: 213px;border-radius: .8rem;" src="${item.thumbnailUrl}" alt="">
